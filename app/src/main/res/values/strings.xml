@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Casa em Dia</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="task_list_title">Casa em Dia</string>
+    <string name="task_list_subtitle">Suas próximas tarefas</string>
+    <string name="task_water_filter">Trocar filtro de água — amanhã</string>
+    <string name="task_pay_electricity">Pagar conta de luz — em 3 dias</string>
+    <string name="task_clean_fridge">Limpar geladeira — sábado</string>
 </resources>
