@@ -8,9 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.knopdev.casaemdia.R
 import br.com.knopdev.casaemdia.model.Task
 
-class TaskAdapter(
-    private val tasks: List<Task>
-) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+
+    private var tasks: List<Task> = emptyList()
+
+    fun updateTasks(newTasks: List<Task>) {
+        tasks = newTasks
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
