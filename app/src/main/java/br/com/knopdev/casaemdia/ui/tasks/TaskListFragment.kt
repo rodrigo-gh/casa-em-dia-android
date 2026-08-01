@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +12,7 @@ import br.com.knopdev.casaemdia.R
 
 class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
-    private val viewModel: TaskListViewModel by viewModels()
+    private val viewModel: TaskListViewModel by activityViewModels()
 
     private val taskAdapter = TaskAdapter()
 

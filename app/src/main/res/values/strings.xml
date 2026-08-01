@@ -11,4 +11,9 @@
     <string name="form_coming_soon">Aqui ficará o formulário de cadastro.</string>
     <string name="add_task">Nova tarefa</string>
     <string name="tasks_list">Lista de tarefas</string>
+    <string name="task_title_label">Título</string>
+    <string name="task_due_date_label">Prazo</string>
+    <string name="save_task">Salvar tarefa</string>
+    <string name="task_title_required">Informe o título da tarefa</string>
+    <string name="no_due_date">Sem prazo definido</string>
 </resources>

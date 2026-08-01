@@ -17,4 +17,18 @@ class TaskListViewModel : ViewModel() {
     )
 
     val tasks: LiveData<List<Task>> = _tasks
+
+    fun addTask(title: String, dueDate: String) {
+        val currentTasks = _tasks.value.orEmpty()
+
+        val nextId = (currentTasks.maxOfOrNull { it.id } ?: 0) + 1
+
+        val newTask = Task(
+            id = nextId,
+            title = title,
+            dueDate = dueDate
+        )
+
+        _tasks.value = currentTasks + newTask
+    }
 }

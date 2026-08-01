@@ -1,60 +1,42 @@
 package br.com.knopdev.casaemdia.ui.tasks
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import br.com.knopdev.casaemdia.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class TaskFormFragment : Fragment(R.layout.fragment_task_form) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TaskFormFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TaskFormFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val viewModel: TaskListViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task_form, container, false)
-    }
+        val titleLayout = view.findViewById<TextInputLayout>(R.id.task_title_layout)
+        val titleInput = view.findViewById<TextInputEditText>(R.id.task_title_input)
+        val dueDateInput = view.findViewById<TextInputEditText>(R.id.task_due_date_input)
+        val saveButton = view.findViewById<Button>(R.id.save_task_button)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskFormFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TaskFormFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        saveButton.setOnClickListener {
+            val title = titleInput.text?.toString()?.trim().orEmpty()
+            val dueDate = dueDateInput.text?.toString()?.trim()
+                .orEmpty()
+                .ifBlank { getString(R.string.no_due_date) }
+
+            if (title.isBlank()) {
+                titleLayout.error = getString(R.string.task_title_required)
+                return@setOnClickListener
             }
+
+            titleLayout.error = null
+            viewModel.addTask(title, dueDate)
+
+            findNavController().navigateUp()
+        }
     }
 }
