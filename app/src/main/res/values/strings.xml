@@ -7,4 +7,8 @@
     <string name="task_water_filter">Trocar filtro de água — amanhã</string>
     <string name="task_pay_electricity">Pagar conta de luz — em 3 dias</string>
     <string name="task_clean_fridge">Limpar geladeira — sábado</string>
+    <string name="new_task">Nova tarefa</string>
+    <string name="form_coming_soon">Aqui ficará o formulário de cadastro.</string>
+    <string name="add_task">Nova tarefa</string>
+    <string name="tasks_list">Lista de tarefas</string>
 </resources>

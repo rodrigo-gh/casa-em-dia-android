@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="br.com.knopdev.casaemdia.ui.tasks.TaskListFragment"
+        android:label="@string/tasks_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_taskFormFragment"
+            app:destination="@id/taskFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFormFragment"
+        android:name="br.com.knopdev.casaemdia.ui.tasks.TaskFormFragment"
+        android:label="@string/new_task" />
+</navigation>
