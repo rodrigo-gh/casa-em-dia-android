@@ -16,4 +16,5 @@
     <string name="save_task">Salvar tarefa</string>
     <string name="task_title_required">Informe o título da tarefa</string>
     <string name="no_due_date">Sem prazo definido</string>
+    <string name="task_completion_description">Marcar tarefa como concluída</string>
 </resources>

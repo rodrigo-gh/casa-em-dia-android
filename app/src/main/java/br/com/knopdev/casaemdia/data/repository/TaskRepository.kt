@@ -23,4 +23,11 @@ class TaskRepository(
             )
         )
     }
+
+    suspend fun updateTaskCompletion(taskId: Long, isCompleted: Boolean) {
+        taskDao.updateCompletion(
+            taskId = taskId,
+            isCompleted = isCompleted
+        )
+    }
 }

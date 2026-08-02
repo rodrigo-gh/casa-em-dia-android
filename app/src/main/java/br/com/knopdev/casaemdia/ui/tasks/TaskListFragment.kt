@@ -18,7 +18,12 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         TaskListViewModelFactory(app.taskRepository)
     }
 
-    private val taskAdapter = TaskAdapter()
+    private val taskAdapter = TaskAdapter { task, isCompleted ->
+        viewModel.updateTaskCompletion(
+            taskId = task.id,
+            isCompleted = isCompleted
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -3,12 +3,15 @@ package br.com.knopdev.casaemdia.ui.tasks
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.knopdev.casaemdia.R
 import br.com.knopdev.casaemdia.model.Task
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(
+    private val onCompletionChanged: (Task, Boolean) -> Unit
+) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private var tasks: List<Task> = emptyList()
 
@@ -21,7 +24,7 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_task, parent, false)
 
-        return TaskViewHolder(view)
+        return TaskViewHolder(view, onCompletionChanged)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
@@ -30,14 +33,34 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun getItemCount(): Int = tasks.size
 
-    class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TaskViewHolder(
+        itemView: View,
+        private val onCompletionChanged: (Task, Boolean) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
 
-        private val titleTextView: TextView = itemView.findViewById(R.id.task_title)
-        private val dueDateTextView: TextView = itemView.findViewById(R.id.task_due_date)
+        private val completedCheckBox: CheckBox =
+            itemView.findViewById(R.id.task_completed_checkbox)
+
+        private val titleTextView: TextView =
+            itemView.findViewById(R.id.task_title)
+
+        private val dueDateTextView: TextView =
+            itemView.findViewById(R.id.task_due_date)
 
         fun bind(task: Task) {
+            completedCheckBox.setOnCheckedChangeListener(null)
+            completedCheckBox.isChecked = task.completed
+
             titleTextView.text = task.title
             dueDateTextView.text = task.dueDate
+
+            itemView.alpha = if (task.completed) 0.5f else 1f
+
+            completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked != task.completed) {
+                    onCompletionChanged(task, isChecked)
+                }
+            }
         }
     }
 }

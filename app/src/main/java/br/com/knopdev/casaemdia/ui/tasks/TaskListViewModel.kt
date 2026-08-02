@@ -17,4 +17,10 @@ class TaskListViewModel(
             repository.addTask(title, dueDate)
         }
     }
+
+    fun updateTaskCompletion(taskId: Long, isCompleted: Boolean) {
+        viewModelScope.launch {
+            repository.updateTaskCompletion(taskId, isCompleted)
+        }
+    }
 }
