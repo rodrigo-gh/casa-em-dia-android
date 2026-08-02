@@ -8,11 +8,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.knopdev.casaemdia.CasaEmDiaApplication
 import br.com.knopdev.casaemdia.R
 
 class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
-    private val viewModel: TaskListViewModel by activityViewModels()
+    private val viewModel: TaskListViewModel by activityViewModels {
+        val app = requireActivity().application as CasaEmDiaApplication
+        TaskListViewModelFactory(app.taskRepository)
+    }
 
     private val taskAdapter = TaskAdapter()
 

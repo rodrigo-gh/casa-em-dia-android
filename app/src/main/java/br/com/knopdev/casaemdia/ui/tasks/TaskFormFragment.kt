@@ -6,13 +6,17 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import br.com.knopdev.casaemdia.CasaEmDiaApplication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import br.com.knopdev.casaemdia.R
 
 class TaskFormFragment : Fragment(R.layout.fragment_task_form) {
 
-    private val viewModel: TaskListViewModel by activityViewModels()
+    private val viewModel: TaskListViewModel by activityViewModels {
+        val app = requireActivity().application as CasaEmDiaApplication
+        TaskListViewModelFactory(app.taskRepository)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
