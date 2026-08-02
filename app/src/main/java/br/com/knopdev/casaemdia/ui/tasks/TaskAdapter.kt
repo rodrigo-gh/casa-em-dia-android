@@ -5,20 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.knopdev.casaemdia.R
 import br.com.knopdev.casaemdia.model.Task
 
 class TaskAdapter(
     private val onCompletionChanged: (Task, Boolean) -> Unit
-) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
-
-    private var tasks: List<Task> = emptyList()
-
-    fun updateTasks(newTasks: List<Task>) {
-        tasks = newTasks
-        notifyDataSetChanged()
-    }
+) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,10 +23,8 @@ class TaskAdapter(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = tasks.size
 
     class TaskViewHolder(
         itemView: View,
@@ -53,7 +46,6 @@ class TaskAdapter(
 
             titleTextView.text = task.title
             dueDateTextView.text = task.dueDate
-
             itemView.alpha = if (task.completed) 0.5f else 1f
 
             completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
@@ -61,6 +53,17 @@ class TaskAdapter(
                     onCompletionChanged(task, isChecked)
                 }
             }
+        }
+    }
+
+    private object TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
+
+        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem == newItem
         }
     }
 }

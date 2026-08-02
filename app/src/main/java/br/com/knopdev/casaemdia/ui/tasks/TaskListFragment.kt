@@ -40,7 +40,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         recyclerView.adapter = taskAdapter
 
         viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
-            taskAdapter.updateTasks(tasks)
+            taskAdapter.submitList(tasks)
         }
     }
 }
