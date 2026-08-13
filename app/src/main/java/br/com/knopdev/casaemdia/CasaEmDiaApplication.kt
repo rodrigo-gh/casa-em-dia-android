@@ -1,17 +1,26 @@
 package br.com.knopdev.casaemdia
 
 import android.app.Application
-import br.com.knopdev.casaemdia.data.local.CasaEmDiaDatabase
-import br.com.knopdev.casaemdia.data.repository.RoomTaskRepository
+import br.com.knopdev.casaemdia.data.repository.NoOpTaskOperationTracker
+import br.com.knopdev.casaemdia.data.repository.TaskOperationTracker
 import br.com.knopdev.casaemdia.data.repository.TaskRepository
+import br.com.knopdev.casaemdia.di.AppContainer
+import br.com.knopdev.casaemdia.domain.usecase.TaskUseCases
 
 class CasaEmDiaApplication : Application() {
 
-    private val database by lazy {
-        CasaEmDiaDatabase.getInstance(this)
+    val container: AppContainer by lazy {
+        AppContainer(this)
     }
 
-    val taskRepository: TaskRepository by lazy {
-        RoomTaskRepository(database.taskDao())
-    }
+    var taskOperationTracker: TaskOperationTracker
+        get() = container.taskOperationTracker
+        set(value) {
+            container.taskOperationTracker = value
+        }
+
+    val taskRepository: TaskRepository
+        get() = container.taskRepository
+
+    fun taskUseCases(): TaskUseCases = container.taskUseCases()
 }

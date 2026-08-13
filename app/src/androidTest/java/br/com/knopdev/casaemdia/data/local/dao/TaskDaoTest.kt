@@ -41,10 +41,17 @@ class TaskDaoTest {
 
     @Test
     fun insert_salvaTarefaNoBanco() = runBlocking {
-        taskDao.insert(
+        taskDao.upsert(
             TaskEntity(
                 title = "Limpar varanda",
-                dueDate = "Domingo"
+                notes = "",
+                dueAtEpochMillis = 3_000,
+                category = "CLEANING",
+                isCompleted = false,
+                reminderEnabled = false,
+                createdAtEpochMillis = 1_000,
+                updatedAtEpochMillis = 1_000,
+                completedAtEpochMillis = null
             )
         )
 
@@ -56,10 +63,17 @@ class TaskDaoTest {
 
     @Test
     fun updateCompletion_atualizaStatusDaTarefa() = runBlocking {
-        taskDao.insert(
+        taskDao.upsert(
             TaskEntity(
                 title = "Pagar internet",
-                dueDate = "Amanhã"
+                notes = "",
+                dueAtEpochMillis = 3_000,
+                category = "BILLS",
+                isCompleted = false,
+                reminderEnabled = false,
+                createdAtEpochMillis = 1_000,
+                updatedAtEpochMillis = 1_000,
+                completedAtEpochMillis = null
             )
         )
 
@@ -67,7 +81,9 @@ class TaskDaoTest {
 
         taskDao.updateCompletion(
             taskId = createdTask.id,
-            isCompleted = true
+            isCompleted = true,
+            completedAtEpochMillis = 2_000,
+            updatedAtEpochMillis = 2_000
         )
 
         val updatedTask = taskDao.observeAll().first().single()

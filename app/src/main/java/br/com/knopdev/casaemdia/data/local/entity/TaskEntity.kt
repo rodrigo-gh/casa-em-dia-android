@@ -8,6 +8,12 @@ data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val title: String,
-    val dueDate: String,
-    val isCompleted: Boolean = false
+    val notes: String,
+    val dueAtEpochMillis: Long?,
+    val category: String,
+    val isCompleted: Boolean,
+    val reminderEnabled: Boolean,
+    val createdAtEpochMillis: Long,
+    val updatedAtEpochMillis: Long,
+    val completedAtEpochMillis: Long?
 )
