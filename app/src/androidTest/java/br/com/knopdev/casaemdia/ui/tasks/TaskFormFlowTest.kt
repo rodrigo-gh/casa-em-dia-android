@@ -18,18 +18,19 @@ class TaskFormFlowTest {
 
     @Test
     fun clickingNewTask_opensTaskForm() {
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(MainActivity::class.java).use {
 
         onView(withId(R.id.add_task_button))
             .perform(click())
 
-        onView(withText(R.string.new_task))
-            .check(matches(isDisplayed()))
+            onView(withText(R.string.new_task))
+                .check(matches(isDisplayed()))
+        }
     }
 
     @Test
     fun savingWithoutTitle_showsValidationError() {
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(MainActivity::class.java).use {
 
         onView(withId(R.id.add_task_button))
             .perform(click())
@@ -37,7 +38,8 @@ class TaskFormFlowTest {
         onView(withId(R.id.save_task_button))
             .perform(click())
 
-        onView(withText(R.string.task_title_required))
-            .check(matches(isDisplayed()))
+            onView(withText(R.string.task_title_required))
+                .check(matches(isDisplayed()))
+        }
     }
 }

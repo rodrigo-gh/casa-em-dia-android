@@ -1,0 +1,38 @@
+[
+  {
+    "id": "clean-fridge",
+    "title": "Limpar a geladeira",
+    "description": "Revise alimentos vencidos e higienize as prateleiras.",
+    "category": "CLEANING"
+  },
+  {
+    "id": "water-filter",
+    "title": "Trocar o filtro de água",
+    "description": "Confira a recomendação do fabricante e registre a próxima troca.",
+    "category": "MAINTENANCE"
+  },
+  {
+    "id": "energy-bill",
+    "title": "Conferir a conta de energia",
+    "description": "Compare o consumo com o mês anterior antes do pagamento.",
+    "category": "BILLS"
+  },
+  {
+    "id": "pantry",
+    "title": "Revisar a despensa",
+    "description": "Faça uma lista do que está acabando e priorize itens próximos do vencimento.",
+    "category": "SHOPPING"
+  },
+  {
+    "id": "washing-machine",
+    "title": "Limpar a máquina de lavar",
+    "description": "Execute o ciclo de limpeza recomendado pelo fabricante.",
+    "category": "MAINTENANCE"
+  },
+  {
+    "id": "bathroom",
+    "title": "Higienizar o banheiro",
+    "description": "Organize os produtos e faça uma limpeza completa.",
+    "category": "CLEANING"
+  }
+]

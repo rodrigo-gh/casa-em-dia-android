@@ -1,7 +1,15 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Base.Theme.CasaEmDia" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#A4D0B8</item>
+        <item name="colorOnPrimary">#0D3828</item>
+        <item name="colorPrimaryContainer">#254E3D</item>
+        <item name="colorOnPrimaryContainer">#BFECD4</item>
+        <item name="colorSecondary">#B9CCC1</item>
+        <item name="colorSurface">#101512</item>
+        <item name="colorSurfaceVariant">#404944</item>
+        <item name="colorError">#FFB4AB</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
     </style>
 </resources>

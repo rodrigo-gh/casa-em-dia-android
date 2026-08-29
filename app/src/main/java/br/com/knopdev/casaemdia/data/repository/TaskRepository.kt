@@ -7,7 +7,16 @@ interface TaskRepository {
 
     val tasks: Flow<List<Task>>
 
-    suspend fun addTask(title: String, dueDate: String)
+    suspend fun getTask(taskId: Long): Task?
 
-    suspend fun updateTaskCompletion(taskId: Long, isCompleted: Boolean)
+    suspend fun saveTask(task: Task): Long
+
+    suspend fun deleteTask(taskId: Long)
+
+    suspend fun updateTaskCompletion(
+        taskId: Long,
+        isCompleted: Boolean,
+        completedAtEpochMillis: Long?,
+        updatedAtEpochMillis: Long
+    )
 }
